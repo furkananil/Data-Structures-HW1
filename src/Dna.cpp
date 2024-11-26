@@ -153,6 +153,36 @@ void Dna::crossOver(int chromIndex1, int chromIndex2) {
     addChromosome(newChrom2);
 }
 
+void Dna::otomatikIslemler(const std::string& islemlerDosyasi) {
+    std::ifstream file(islemlerDosyasi);
+    if (!file) {
+        std::cerr << "Error: Islemler.txt dosyasi açılamadi.\n";
+        return;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        char islem;
+        int chromIndex1, chromIndex2;
+
+        ss >> islem >> chromIndex1 >> chromIndex2;
+
+        if (islem == 'C') {
+            // Çaprazlama işlemi
+            crossOver(chromIndex1, chromIndex2);
+        } else if (islem == 'M') {
+            // Mutasyon işlemi
+            mutateGene(chromIndex1, chromIndex2);  // Daha önce tanımladığımız fonksiyonu kullanıyoruz
+        } else {
+            std::cerr << "Bilinmeyen islem: " << islem << std::endl;
+        }
+    }
+
+    std::cout << "Islemler tamamlandi!\n";
+}
+
+
 
 
 

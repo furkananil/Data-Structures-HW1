@@ -42,8 +42,10 @@ int main() {
             break;
         }
         case 3:
+            dna.otomatikIslemler("Islemler.txt");
             break;
         case 4:
+            dna.print();
             break;
         case 5:
             std::cout << "Cikis yapiliyor.\n";

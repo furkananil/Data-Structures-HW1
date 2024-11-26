@@ -18,7 +18,7 @@ public:
     void mutateGene(int chromosomeIndex, int geneIndex);
     void print() const;
     void crossOver(int chromIndex1, int chromIndex2);
-
+    void otomatikIslemler(const std::string& islemlerDosyasi);
 };
 
 #endif 
