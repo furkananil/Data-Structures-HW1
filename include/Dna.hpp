@@ -19,6 +19,7 @@ public:
     void print() const;
     void crossOver(int chromIndex1, int chromIndex2);
     void otomatikIslemler(const std::string& islemlerDosyasi);
+    void writeToScreen();
 };
 
 #endif 

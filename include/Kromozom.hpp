@@ -19,6 +19,7 @@ public:
     void mutateGene(int index);
     void print() const;
     Gen* getHead() const;
+    Gen* getTail() const;
 };
 
 #endif 

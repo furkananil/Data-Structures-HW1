@@ -156,7 +156,7 @@ void Dna::crossOver(int chromIndex1, int chromIndex2) {
 void Dna::otomatikIslemler(const std::string& islemlerDosyasi) {
     std::ifstream file(islemlerDosyasi);
     if (!file) {
-        std::cerr << "Error: Islemler.txt dosyasi açılamadi.\n";
+        std::cerr << "Error: Islemler.txt dosyasi acilamadi.\n";
         return;
     }
 
@@ -178,9 +178,53 @@ void Dna::otomatikIslemler(const std::string& islemlerDosyasi) {
             std::cerr << "Bilinmeyen islem: " << islem << std::endl;
         }
     }
-
-    std::cout << "Islemler tamamlandi!\n";
+    std::cout << "\nOtomatik Islemler basariyla tamamlandi!\n";
 }
+
+void Dna::writeToScreen() {
+    Kromozom* temp = head;
+    while (temp) {
+        // İlk geni al ve sakla
+        Gen* firstGene = temp->getHead();
+        if (!firstGene) {
+            temp = temp->next;
+            continue;
+        }
+        char firstChar = firstGene->getData();
+
+        // Eğer ilk gen A ise direkt yazdır ve sonraki kromozoma geç
+        if (firstChar == 'A') {
+            std::cout << firstChar << " ";
+            temp = temp->next;
+            continue;
+        }
+
+        // Tail'den başlayarak küçük gen arama
+        Gen* current = temp->getTail();
+        bool found = false;
+
+        while (current) {
+            // Eğer daha küçük bir gen bulunursa, yazdır ve çık
+            if (current->getData() < firstChar) {
+                std::cout << current->getData() << " ";
+                found = true;
+                break;
+            }
+            // Bir önceki gene geç
+            current = current->prev;
+        }
+
+        // Eğer küçük gen bulunamadıysa, ilk geni yazdır
+        if (!found) {
+            std::cout << firstChar << " ";
+        }
+
+        // Sonraki kromozoma geç
+        temp = temp->next;
+    }
+    std::cout << std::endl;
+}
+
 
 
 

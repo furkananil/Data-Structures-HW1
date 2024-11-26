@@ -46,3 +46,7 @@ void Kromozom::print() const {
 Gen* Kromozom::getHead() const {
     return head;
 }
+
+Gen* Kromozom::getTail() const {
+    return tail;
+}
