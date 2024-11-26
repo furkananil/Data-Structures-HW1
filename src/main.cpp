@@ -20,6 +20,15 @@ int main() {
 
         switch (secim) {
         case 1:
+            int chromIndex1, chromIndex2;
+            std::cout << "Birinci kromozom numarasini giriniz: ";
+            std::cin >> chromIndex1;
+            std::cout << "Ikinci kromozom numarasini giriniz: ";
+            std::cin >> chromIndex2;
+            dna.crossOver(chromIndex1, chromIndex2);
+
+            std::cout << "Caprazlama islemi tamamlandi. Yeni kromozomlar olusturuldu.\n";
+            dna.print();
             break;
         case 2: {
             int chromIndex, genIndex;

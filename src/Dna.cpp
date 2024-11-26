@@ -67,3 +67,106 @@ void Dna::print() const {
     }
 }
 
+void Dna::crossOver(int chromIndex1, int chromIndex2) {
+    Kromozom* first = head;
+    Kromozom* second = head;
+
+    // İlk ve ikinci kromozomları bul
+    for (int i = 0; i < chromIndex1 && first; ++i) {
+        first = first->next;
+    }
+    for (int i = 0; i < chromIndex2 && second; ++i) {
+        second = second->next;
+    }
+
+    if (!first || !second) {
+        std::cerr << "Error: Chromosome index out of range.\n";
+        return;
+    }
+
+    // İlk ve ikinci kromozomların uzunluklarını bul
+    int firstLength = 0, secondLength = 0;
+    Gen* temp = first->getHead();
+    while (temp) {
+        firstLength++;
+        temp = temp->next;
+    }
+
+    temp = second->getHead();
+    while (temp) {
+        secondLength++;
+        temp = temp->next;
+    }
+
+    // Orta noktaları belirle (tek veya çift uzunluk durumunu kontrol et)
+    int firstMid = firstLength / 2;
+    int secondMid = secondLength / 2;
+
+    // Yeni kromozomları oluştur
+    Kromozom* newChrom1 = new Kromozom();
+    Kromozom* newChrom2 = new Kromozom();
+
+    // İlk kromozomun sol kısmını ekle
+    temp = first->getHead();
+    for (int i = 0; i < firstMid; ++i) {
+        newChrom1->addGene(new Gen(temp->getData()));
+        temp = temp->next;
+    }
+
+    // İkinci kromozomun sağ kısmını ekle
+    temp = second->getHead();
+    for (int i = 0; i < secondMid; ++i) {
+        temp = temp->next;
+    }
+    if (secondLength % 2 == 1) {  // Eğer ikinci kromozomun gen sayısı tekse
+        temp = temp->next;  // Ortadaki gen atlanacak
+    }
+    while (temp) {
+        newChrom1->addGene(new Gen(temp->getData()));
+        temp = temp->next;
+    }
+
+    // İlk kromozomun sağ kısmını ekle
+    temp = first->getHead();
+    for (int i = 0; i < firstMid; ++i) {
+        temp = temp->next;
+    }
+
+    // Tek sayılı kromozom için ortadaki gen atlanacak
+    if (firstLength % 2 == 1) {  // Eğer ilk kromozomun gen sayısı tekse
+        temp = temp->next;  // Ortadaki gen atlanacak
+    }
+    while (temp) {
+        newChrom2->addGene(new Gen(temp->getData()));
+        temp = temp->next;
+    }
+
+    // İkinci kromozomun sol kısmını ekle
+    temp = second->getHead();
+    for (int i = 0; i < secondMid; ++i) {
+        newChrom2->addGene(new Gen(temp->getData()));
+        temp = temp->next;
+    }
+
+    // Yeni kromozomları bağlı listeye ekle
+    addChromosome(newChrom1);
+    addChromosome(newChrom2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

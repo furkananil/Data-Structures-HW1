@@ -42,3 +42,7 @@ void Kromozom::print() const {
     }
     std::cout <<"\n";
 }
+
+Gen* Kromozom::getHead() const {
+    return head;
+}

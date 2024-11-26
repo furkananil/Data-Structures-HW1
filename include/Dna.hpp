@@ -17,6 +17,8 @@ public:
     void readFromFile(const std::string& filename);
     void mutateGene(int chromosomeIndex, int geneIndex);
     void print() const;
+    void crossOver(int chromIndex1, int chromIndex2);
+
 };
 
 #endif 
