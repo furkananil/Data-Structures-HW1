@@ -13,5 +13,4 @@ public:
     char getData() const; 
     void setData(char data);
 };
-
 #endif 

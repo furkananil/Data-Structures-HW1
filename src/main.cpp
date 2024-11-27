@@ -1,63 +1,58 @@
 #include <iostream>
-#include <chrono>
 #include "Dna.hpp"
 
 int main() {
-    auto start = std::chrono::high_resolution_clock::now();
-    Dna dna;
-    dna.readFromFile("Dna.txt");
-    auto end = std::chrono::high_resolution_clock::now();
 
-    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    Dna* dna = new Dna();
 
-    std::cout << elapsed.count() << "\n";
+    dna->DosyadanOku("Dna.txt");
 
     int secim;
     do {
-        std::cout << "------------------------------------\n";
+        std::cout << "\n------------------------------------\n";
         std::cout << "|     1- Caprazlama                |\n";
         std::cout << "|     2- Mutasyon                  |\n";
         std::cout << "|     3- Otomatik Islemler         |\n";
         std::cout << "|     4- Ekrana Yaz                |\n";
         std::cout << "|     5- Cikis                     |\n";
         std::cout << "------------------------------------\n";
-        std::cout << "Secimiziniz ;\n";
+        std::cout << "Secimiziniz :\n";
 
         std::cin >> secim;
 
         switch (secim) {
         case 1:
-            int chromIndex1, chromIndex2;
+            int kromozomIndex1, kromozomIndex2;
             std::cout << "Birinci kromozom numarasini giriniz: ";
-            std::cin >> chromIndex1;
+            std::cin >> kromozomIndex1;
             std::cout << "Ikinci kromozom numarasini giriniz: ";
-            std::cin >> chromIndex2;
-            dna.crossOver(chromIndex1, chromIndex2);
+            std::cin >> kromozomIndex2;
+            dna->Caprazlama(kromozomIndex1, kromozomIndex2);
 
-            std::cout << "\nCaprazlama islemi tamamlandi. Yeni kromozomlar olusturuldu.\n";
+            std::cout << "\n=Caprazlama islemi tamamlandi. Yeni kromozomlar olusturuldu!=\n";
             break;
         case 2: {
-            int chromIndex, genIndex;
+            int kromozomIndex, genIndex;
             std::cout << "Kromozom numarasini giriniz: ";
-            std::cin >> chromIndex;
+            std::cin >> kromozomIndex;
             std::cout << "Gen numarasini giriniz: ";
             std::cin >> genIndex;
-            dna.mutateGene(chromIndex, genIndex);
-            std::cout << "\nMutasyon islemi basariyla tamamlandi.\n";
+            dna->Mutasyon(kromozomIndex, genIndex);
+            std::cout << "\n=Mutasyon islemi basariyla tamamlandi!=\n";
             break;
         }
         case 3:
-            dna.otomatikIslemler("Islemler.txt");
+            dna->otomatikIslemler("Islemler.txt");
             break;
         case 4:
-            dna.writeToScreen();
+            dna->EkranaYaz();
             break;
         case 5:
-            dna.print();
-            std::cout << "\nCikis yapiliyor.\n";
+            std::cout << "\n=========Cikis yapiliyor.==========\n";
+            delete dna; // tahsil edilen alan geri iade edildi.
             break;
         default:
-            std::cout << "Gecersiz secim!\n";
+            std::cout << "=Gecersiz secim!=\n";
             break;
         }
     } while (secim != 5);

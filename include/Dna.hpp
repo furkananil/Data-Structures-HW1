@@ -13,13 +13,11 @@ public:
     Dna();
     ~Dna();
 
-    void addChromosome(Kromozom* kromozom);
-    void readFromFile(const std::string& filename);
-    void mutateGene(int chromosomeIndex, int geneIndex);
-    void print() const;
-    void crossOver(int chromIndex1, int chromIndex2);
+    void kromozomEkle(Kromozom* kromozom);
+    void DosyadanOku(const std::string& filename);
+    void Mutasyon(int kromozomIndex, int genIndex);
+    void Caprazlama(int kromozomIndex1, int kromozomIndex2);
     void otomatikIslemler(const std::string& islemlerDosyasi);
-    void writeToScreen();
+    void EkranaYaz();
 };
-
 #endif 

@@ -12,7 +12,7 @@ Kromozom::~Kromozom() {
     }
 }
 
-void Kromozom::addGene(Gen* gen) {
+void Kromozom::genEkle(Gen* gen) {
     if (!head) {
         head = tail = gen;
     } else {
@@ -22,7 +22,7 @@ void Kromozom::addGene(Gen* gen) {
     }
 }
 
-void Kromozom::mutateGene(int index) {
+void Kromozom::Mutasyon(int index) {
     Gen* current = head;
     for (int i = 0; i < index && current; ++i) {
         current = current->next;
@@ -30,17 +30,8 @@ void Kromozom::mutateGene(int index) {
     if (current) {
         current->setData('X');
     } else {
-        std::cerr << "Error: Gene index out of range.\n";
+        std::cerr << "Mutasyon Hatasi : index tasma hatasi\n";
     }
-}
-
-void Kromozom::print() const {
-    Gen* current = head;
-    while (current) {
-        std::cout << current->getData() << " ";
-        current = current->next;
-    }
-    std::cout <<"\n";
 }
 
 Gen* Kromozom::getHead() const {

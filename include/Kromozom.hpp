@@ -10,16 +10,13 @@ private:
 
 public:
     Kromozom* next; 
-    Kromozom* prev; 
-
+    Kromozom* prev;
     Kromozom();
     ~Kromozom();
 
-    void addGene(Gen* gen);
-    void mutateGene(int index);
-    void print() const;
+    void genEkle(Gen* gen);
+    void Mutasyon(int index);
     Gen* getHead() const;
     Gen* getTail() const;
 };
-
 #endif 
